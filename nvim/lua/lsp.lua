@@ -47,7 +47,8 @@ local lspconf = require("lspconfig")
 local servers = {
 	tsserver = "tsserver",
 	rust_analyzer = "rust-analyzer",
-	sumneko_lua = "lua-lsp"
+	sumneko_lua = "lua-lsp",
+	clangd = "clangd"
 }
 
 for server, command in pairs(servers) do
@@ -69,3 +70,7 @@ require('lspkind').init {
 	with_text = true,
 	preset = 'default'
 }
+-- lspconf['elixirls'].setup()
+-- [[
+-- /home/yxqsnz/Projects/Elixir/elixir-ls/rel/language_server.sh
+--]]

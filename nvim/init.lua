@@ -3,9 +3,12 @@ local vim = vim
 require[[paq]] {
 	-- paq
 	"savq/paq-nvim",
+	-- terminal
+	"akinsho/nvim-toggleterm.lua",
 	-- saga
 	"glepnir/lspsaga.nvim",
 	-- colors
+	"sainnhe/everforest",
 	"navarasu/onedark.nvim",
 	"norcalli/nvim-colorizer.lua",
 	-- some settings
@@ -43,7 +46,7 @@ vim.g.loaded_netrw = 0
 vim.g.loaded_netrwPlugin = 0
 vim.g.loaded_spec = 0
 vim.g.loaded_syncolor = 0
-
+vim.g.nvim_tree_side = 'left'
 -- options
 local opt, bopt, wopt = vim.o, vim.bo, vim.wo
 opt.splitbelow = true
@@ -70,6 +73,9 @@ vim.g.rainbow_active = 1;
 vimp.nnoremap('<C-q>', function()
 	vim.cmd(':q')
 end)
+vimp.nnoremap('<C-z>', function() 
+	vim.cmd(":ToggleTerminal")
+end)
 vimp.nnoremap('<C-w>', function() 
 	vim.cmd(':w')
 end)
@@ -84,3 +90,6 @@ require[[statusline]]
 require[[maps]]
 require[[indentation]]
 require[[saga]]
+require("toggleterm").setup {
+	open_mapping = [[<C-l>]],
+}
