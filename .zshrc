@@ -10,6 +10,7 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
 setopt share_history
+source ~/utils.sh
 HISTSIZE=100000000
 SAVEHIST=100000000
 fc -p ~/.zsh_history
@@ -146,7 +147,7 @@ change-cursor() {
    esac
 }
 change-cursor 4
-zplug load --verbose
+zplug load 
 eval "$(starship init zsh)"
 export RED_COLOR="\033[0;31m"
 export BLUE_COLOR="\033[0;34m"
@@ -154,11 +155,9 @@ export BOLD=""
 export RESET="\033[0m"
 export force_color_prompt=1
 # export SUDO_PROMPT="hey ${RED}${USER}${RESET}@${BLUE_COLOR}$(cat /etc/hostname)${RESET} type ya passwd: "
-export SUDO_PROMPT="passwd: "
-# sudo() {
-	# printf "hey ${RED_COLOR}${USER}${RESET}@${BLUE_COLOR}$(cat /etc/hostname)${RESET} type ya passwd"
-	# if ! /usr/bin/sudo $@
-	# then
-		# printf "hello ${RED_COLOR}Motherfucker${RESET} password is incorrect.\n"
-	# fi
-# }
+export SUDO_PROMPT="⠀"
+function sudo() {
+	printf "${RED_COLOR}${USER}${RESET}@${BLUE_COLOR}$(cat /etc/hostname)${RESET} SUDO?\n${BLUE_COLOR}❯${RESET}"
+	/usr/bin/sudo $@
+}
+. $HOME/.asdf/asdf.sh
