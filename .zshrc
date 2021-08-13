@@ -155,9 +155,9 @@ export BOLD=""
 export RESET="\033[0m"
 export force_color_prompt=1
 # export SUDO_PROMPT="hey ${RED}${USER}${RESET}@${BLUE_COLOR}$(cat /etc/hostname)${RESET} type ya passwd: "
-export SUDO_PROMPT="⠀"
-function sudo() {
-	printf "${RED_COLOR}${USER}${RESET}@${BLUE_COLOR}$(cat /etc/hostname)${RESET} SUDO?\n${BLUE_COLOR}❯${RESET}"
-	/usr/bin/sudo $@
-}
+export SUDO_PROMPT="Hello vadim: "
+# function sudo() {
+	# printf "${RED_COLOR}${USER}${RESET}@${BLUE_COLOR}$(cat /etc/hostname)${RESET} SUDO?\n${BLUE_COLOR}❯${RESET}"
+	# /usr/bin/sudo $@
+# }
 . $HOME/.asdf/asdf.sh
