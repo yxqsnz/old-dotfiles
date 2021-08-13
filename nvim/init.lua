@@ -3,6 +3,8 @@ local vim = vim
 require[[paq]] {
 	-- paq
 	"savq/paq-nvim",
+	-- fluent
+	"projectfluent/fluent.vim", 
 	-- terminal
 	"akinsho/nvim-toggleterm.lua",
 	-- saga
