@@ -48,7 +48,8 @@ local servers = {
 	tsserver = "tsserver",
 	rust_analyzer = "rust-analyzer",
 	sumneko_lua = "lua-lsp",
-	clangd = "clangd"
+	clangd = "clangd",
+	sleeplylyzer = "/home/yxqsnz/Documents/Projects/Rust/sleepylyzer/target/debug/sleepylyzer"
 }
 
 for server, command in pairs(servers) do
