@@ -1,5 +1,5 @@
 vim.o.completeopt = "menuone,noselect"
-
+local vimp = require('vimp')
 require "compe".setup {
 	enabled = true,
 	autocomplete = true,
@@ -42,6 +42,7 @@ end
 
 -- tab completion
 
+
 _G.tab_complete = function()
 	if vim.fn.pumvisible() == 1 then
 		return t "<C-n>"
@@ -62,7 +63,6 @@ _G.s_tab_complete = function()
 end
 
 --  mappings
-
 vim.api.nvim_set_keymap("i", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("s", "<Tab>", "v:lua.tab_complete()", {expr = true})
 vim.api.nvim_set_keymap("i", "<S-Tab>", "v:lua.s_tab_complete()", {expr = true})
@@ -77,14 +77,15 @@ function _G.completions()
 	end
 	return npairs.check_break_line_char()
 end
-
 vim.api.nvim_set_keymap("i", "<CR>", "v:lua.completions()", {expr = true})
-
+require('vimp').nnoremap("<C-F>", function() 
+	require('compe')._complete(_A)
+end)
 local g = vim.g
 
 -- speeden up compe
-g.loaded_compe_calc = 0
-g.loaded_compe_emoji = 0
+g.loaded_compe_calc = 1
+g.loaded_compe_emoji = 1
 
 g.loaded_compe_luasnip = 0
 g.loaded_compe_nvim_lua = 0
@@ -92,8 +93,7 @@ g.loaded_compe_nvim_lua = 0
 g.loaded_compe_path = 0
 g.loaded_compe_spell = 0
 g.loaded_compe_tags = 0
-g.loaded_compe_treesitter = 0
-
+g.loaded_compe_treesitter = 1
 g.loaded_compe_snippets_nvim = 0
 
 g.loaded_compe_ultisnips = 0

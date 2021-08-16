@@ -71,7 +71,4 @@ require('lspkind').init {
 	with_text = true,
 	preset = 'default'
 }
--- lspconf['elixirls'].setup()
--- [[
--- /home/yxqsnz/Projects/Elixir/elixir-ls/rel/language_server.sh
---]]
+
