@@ -13,3 +13,4 @@ require[[indentation]]
 require[[saga]]
 require[[rusttools]]
 require[[toggletermsettings]]
+print('OwO')

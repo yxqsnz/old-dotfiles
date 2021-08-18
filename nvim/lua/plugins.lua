@@ -26,6 +26,7 @@ local plugins = require('packer').startup(function()
   use "lukas-reineke/indent-blankline.nvim"
   use "dunstontc/vim-vscode-theme"
   use "rhysd/vim-clang-format"
+  use "NvChad/nvim-base16.lua"
   use "simrat39/rust-tools.nvim"
 end)
 vim.opt.termguicolors = true

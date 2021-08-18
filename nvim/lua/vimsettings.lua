@@ -23,8 +23,10 @@ vim.g.loaded_syncolor = 0
 vim.g.mapleader = ","
 vim.g.rustfmt_autosave = 1;
 vim.g.rainbow_active = 1;
-vim.cmd[[colorscheme palenight]]
+-- vim.cmd[[colorscheme palenight]]
 vim.cmd[[command! Term split|term]]
 vim.cmd[[command! VTerm belowright vsplit|term]]
 
+local base16 = require('base16')
+base16(base16.themes('javacafe'), true)
 

@@ -43,7 +43,6 @@ local function on_attach(client)
 	--end
 end
 --}}}
---
 -- tups wiith no configuration {{{
 colorizer.setup()
 saga.init_lsp_saga()
@@ -500,4 +499,3 @@ bufferline.setup {
 	}
 }
 -- }}}
---
