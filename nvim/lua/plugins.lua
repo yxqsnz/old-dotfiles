@@ -28,6 +28,9 @@ local plugins = require('packer').startup(function()
   use "rhysd/vim-clang-format"
   use "NvChad/nvim-base16.lua"
   use "simrat39/rust-tools.nvim"
+  use "glepnir/dashboard-nvim"
+  use "nvim-telescope/telescope.nvim"
+  use "liuchengxu/vim-clap"
 end)
 vim.opt.termguicolors = true
 require[[nvim-autopairs]].setup()

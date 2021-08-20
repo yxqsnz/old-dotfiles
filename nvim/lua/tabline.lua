@@ -1,78 +1,123 @@
--- define some colors
-local bar_fg = "#565c64"
-local bar_bg = '#121622'
-local selected_bgfg = '#171b27'
-local activeBuffer_fg = "#c8ccd4"
+local global_theme = "themes.javacafe"
+local colors = require(global_theme)
 
-require[[bufferline]].setup {
-	options = {
-		diagnostics = "nvim_lsp",
-		diagnostics_indicator = function(count, level, _)
-			local icon = level:match("error") and " " or " "
-			return " " .. icon .. count
-		end,
-		offsets = {{filetype = "NvimTree", text = "Explorer"}},
-		buffer_close_icon = "",
-		modified_icon = "",
-		left_trunc_marker = "",
-		right_trunc_marker = "",
-		max_name_length = 14,
-		max_prefix_length = 13,
-		tab_size = 20,
-		show_tab_indicators = true,
-		enforce_regular_tabs = false,
-		view = "multiwindow",
-		show_close_icon = false,
-		show_buffer_close_icons = true,
-		separator_style = "thick",
-		mappings = "true",
-		sort_by = "extension"
-	},
-	-- bar colors!!
-	highlights = {
-		fill = {
-			guifg = bar_fg,
-			guibg = bar_bg
-		},
-		background = {
-			guifg = bar_fg,
-			guibg = bar_bg
-		},
-		-- buffer
-		buffer_selected = {
-			guifg = activeBuffer_fg,
-			guibg = selected_bgfg,
-			gui = "bold"
-		},
-		buffer_visible = {
-			guifg = "#9298a0",
-			guibg = bar_bg
-		},
-		-- buffer separators
-		separator = {
-			guifg = bar_bg,
-			guibg = bar_bg
-		},
-		separator_selected = {
-			guifg = selected_bgfg,
-			guibg = selected_bgfg
-		},
-		separator_visible = {
-			guifg = bar_bg,
-			guibg = bar_bg
-		},
-		indicator_selected = {
-			guifg = bar_bg,
-			guibg = bar_bg
-		},
-		-- modified files (but not saved)
-		modified_selected = {
-			guifg = "#A3BE8C",
-			guibg = selected_bgfg
-		},
-		modified_visible = {
-			guifg = "#BF616A",
-			guibg = "#23272f"
-		}
-	}
+local present, bufferline = pcall(require, "bufferline")
+if not present then
+   return
+end
+
+bufferline.setup {
+   options = {
+      offsets = { { filetype = "NvimTree", text = "", padding = 1 } },
+      buffer_close_icon = "",
+      modified_icon = "",
+      close_icon = "",
+      left_trunc_marker = "",
+      right_trunc_marker = "",
+      max_name_length = 14,
+      max_prefix_length = 13,
+      tab_size = 20,
+      show_tab_indicators = true,
+      enforce_regular_tabs = false,
+      view = "multiwindow",
+      show_buffer_close_icons = true,
+      separator_style = "thin",
+      mappings = true,
+      always_show_bufferline = true,
+      custom_filter = function(buf_number)
+         -- Func to filter out our managed/persistent split terms
+         local present_type, type = pcall(function()
+            return vim.api.nvim_buf_get_var(buf_number, "term_type")
+         end)
+
+         if present_type then
+            if type == "vert" then
+               return false
+            elseif type == "hori" then
+               return false
+            else
+               return true
+            end
+         else
+            return true
+         end
+      end,
+   },
+   highlights = {
+      fill = {
+         guifg = colors.grey_fg,
+         guibg = colors.black2,
+      },
+      background = {
+         guifg = colors.grey_fg,
+         guibg = colors.black2,
+      },
+      -- buffers
+      buffer_visible = {
+         guifg = colors.light_grey,
+         guibg = colors.black2,
+      },
+      buffer_selected = {
+         guifg = colors.white,
+         guibg = colors.black,
+         gui = "bold",
+      },
+      -- tabs
+      tab = {
+         guifg = colors.light_grey,
+         guibg = colors.one_bg3,
+      },
+      tab_selected = {
+         guifg = colors.black2,
+         guibg = colors.nord_blue,
+      },
+      tab_close = {
+         guifg = colors.red,
+         guibg = colors.black,
+      },
+      indicator_selected = {
+         guifg = colors.black,
+         guibg = colors.black,
+      },
+      -- separators
+      separator = {
+         guifg = colors.black2,
+         guibg = colors.black2,
+      },
+      separator_visible = {
+         guifg = colors.black2,
+         guibg = colors.black2,
+      },
+      separator_selected = {
+         guifg = colors.black2,
+         guibg = colors.black2,
+      },
+      -- modified
+      modified = {
+         guifg = colors.red,
+         guibg = colors.black2,
+      },
+      modified_visible = {
+         guifg = colors.red,
+         guibg = colors.black2,
+      },
+      modified_selected = {
+         guifg = colors.green,
+         guibg = colors.black,
+      },
+      -- close buttons
+
+      close_button = {
+         guifg = colors.light_grey,
+         guibg = colors.black2,
+      },
+      close_button_visible = {
+         guifg = colors.light_grey,
+         guibg = colors.black2,
+      },
+      close_button_selected = {
+         guifg = colors.red,
+         guibg = colors.black,
+      },
+   },
 }

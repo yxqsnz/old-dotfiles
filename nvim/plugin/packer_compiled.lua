@@ -73,6 +73,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/3bc.vim"
   },
+  ["dashboard-nvim"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/dashboard-nvim"
+  },
   everforest = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/everforest"
@@ -161,9 +165,17 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/rust.vim"
   },
+  ["telescope.nvim"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
   ["vim-clang-format"] = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/vim-clang-format"
+  },
+  ["vim-clap"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/vim-clap"
   },
   ["vim-toml"] = {
     loaded = true,

@@ -13,4 +13,5 @@ require[[indentation]]
 require[[saga]]
 require[[rusttools]]
 require[[toggletermsettings]]
-print('OwO')
+require[[dashboard]]
+require[[onReady]]
