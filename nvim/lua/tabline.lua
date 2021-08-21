@@ -22,7 +22,7 @@ bufferline.setup {
       view = "multiwindow",
       show_buffer_close_icons = true,
       separator_style = "thin",
-      mappings = true,
+      --mappings = true,
       always_show_bufferline = true,
       custom_filter = function(buf_number)
          -- Func to filter out our managed/persistent split terms

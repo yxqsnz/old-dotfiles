@@ -447,7 +447,7 @@ bufferline.setup {
 		show_close_icon = false,
 		show_buffer_close_icons = true,
 		separator_style = "thick",
-		mappings = "true",
+		-- mappings = "true",
 		sort_by = "extension"
 	},
 	-- bar colors!!

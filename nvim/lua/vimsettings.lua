@@ -29,4 +29,3 @@ vim.cmd[[command! VTerm belowright vsplit|term]]
 
 local base16 = require('base16')
 base16(base16.themes('javacafe'), true)
-
