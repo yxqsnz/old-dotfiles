@@ -1,0 +1,11 @@
+[user]
+	email = yxqsnz@pm.me
+	name = yxqsnz
+	signingkey = 385DA88D661C00ADB3C1C5E467894339F535CDA0
+[commit]
+	gpgsign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
