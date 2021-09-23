@@ -1,0 +1,10 @@
+{
+    "name": "Sender",
+    "version": "0.0.1",
+    "description": "Sender.",
+    "author": "yxqsnz",
+    "license": "MIT",
+    "dependencies": [
+        "pc-commands"
+    ]
+}
