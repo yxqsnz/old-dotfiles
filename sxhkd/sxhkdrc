@@ -3,20 +3,20 @@
 #
 
 # terminal emulator
-Print
-	flameshot full -c
-shift + Print
-	flameshot gui
 super + Return
-	konsole
+	kitty 
+
 # program launcher
-super + k
-	rofi -show drun -modi drun
+super + space
+	dmenu_run -p RUN -l 19  
 
 # make sxhkd reload its configuration files:
 super + Escape
 	pkill -USR1 -x sxhkd
-
+Print
+	flameshot full -c
+shift + Print
+	flameshot gui
 #
 # bspwm hotkeys
 #
@@ -28,7 +28,6 @@ super + alt + {q,r}
 # close and kill
 super + {_,shift + }q
 	bspc node -{c,k}
-
 
 # alternate between the tiled and monocle layout
 super + m
