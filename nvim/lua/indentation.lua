@@ -1,11 +1,11 @@
 local vim = vim
 
-vim.o.fillchars = table.concat(
-	{
-		[[fold: ]]
-	},
-	","
-)
+--vim.o.fillchars = table.concat(
+--	{
+--		[[fold: ]]
+--	},
+--	","
+--)
 vim.o.foldmethod = "indent"
 vim.wo.listchars = table.concat(
 	{

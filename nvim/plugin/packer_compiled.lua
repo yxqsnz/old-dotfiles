@@ -44,8 +44,8 @@ local function save_profiles(threshold)
 end
 
 time([[Luarocks path setup]], true)
-local package_path_str = "/home/yxqsnz/.cache/nvim/packer_hererocks/2.0.5/share/lua/5.1/?.lua;/home/yxqsnz/.cache/nvim/packer_hererocks/2.0.5/share/lua/5.1/?/init.lua;/home/yxqsnz/.cache/nvim/packer_hererocks/2.0.5/lib/luarocks/rocks-5.1/?.lua;/home/yxqsnz/.cache/nvim/packer_hererocks/2.0.5/lib/luarocks/rocks-5.1/?/init.lua"
-local install_cpath_pattern = "/home/yxqsnz/.cache/nvim/packer_hererocks/2.0.5/lib/lua/5.1/?.so"
+local package_path_str = "/home/yxqsnz/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?.lua;/home/yxqsnz/.cache/nvim/packer_hererocks/2.1.0-beta3/share/lua/5.1/?/init.lua;/home/yxqsnz/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?.lua;/home/yxqsnz/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/luarocks/rocks-5.1/?/init.lua"
+local install_cpath_pattern = "/home/yxqsnz/.cache/nvim/packer_hererocks/2.1.0-beta3/lib/lua/5.1/?.so"
 if not string.find(package.path, package_path_str, 1, true) then
   package.path = package.path .. ';' .. package_path_str
 end
@@ -72,6 +72,38 @@ _G.packer_plugins = {
   ["3bc.vim"] = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/3bc.vim"
+  },
+  LuaSnip = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/LuaSnip"
+  },
+  ["cmp-buffer"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/cmp-buffer"
+  },
+  ["cmp-emoji"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/cmp-emoji"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp"
+  },
+  ["cmp-spell"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/cmp-spell"
+  },
+  ["cmp-tabnine"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/cmp-tabnine"
+  },
+  ["completion-nvim"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/completion-nvim"
+  },
+  ["crates.nvim"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/crates.nvim"
   },
   ["dashboard-nvim"] = {
     loaded = true,
@@ -113,13 +145,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/nvim-bufferline.lua"
   },
+  ["nvim-cmp"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/nvim-cmp"
+  },
   ["nvim-colorizer.lua"] = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
-  },
-  ["nvim-compe"] = {
-    loaded = true,
-    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/nvim-compe"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -141,13 +173,13 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
-  ["onedark.nvim"] = {
-    loaded = true,
-    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/onedark.nvim"
-  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/packer.nvim"
+  },
+  ["plenary.nvim"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/plenary.nvim"
   },
   ["presence.nvim"] = {
     loaded = true,
@@ -177,6 +209,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/vim-clap"
   },
+  ["vim-qml"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/vim-qml"
+  },
   ["vim-toml"] = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/vim-toml"
@@ -188,6 +224,10 @@ _G.packer_plugins = {
   ["vim-vscode-theme"] = {
     loaded = true,
     path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/vim-vscode-theme"
+  },
+  ["vim-vsnip"] = {
+    loaded = true,
+    path = "/home/yxqsnz/.local/share/nvim/site/pack/packer/start/vim-vsnip"
   },
   vimpeccable = {
     loaded = true,
