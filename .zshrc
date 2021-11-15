@@ -1,286 +1,169 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+source ~/.zsh/antigen.zsh
+source ~/.zsh/pwplug.sh
+DC_CANARY_FLATPAK_DIRECTORY="$HOME/.var/app/com.discordapp.DiscordCanary"
+PC_DIRECTORY="$DC_CANARY_FLATPAK_DIRECTORY/.powercord"
+fpath=( ~/.zfunc "${fpath[@]}" )
+# plugins
+	antigen bundle git
+	antigen bundle heroku
+	antigen bundle pip
+	antigen bundle lein
+	antigen bundle command-not-found
+	antigen bundle zdharma-continuum/fast-syntax-highlighting
+	antigen bundle zsh-users/zsh-autosuggestions
+	antigen bundle zsh-users/zsh-completions
+# endplugins
 
-# Path to your oh-my-zsh installation.
-export LC_ALL="en_US.utf-8"
-export LANGUAGE="en_US.utf-8"
+# configure plugins
+	export HISTFILE=$HOME/.zsh/.zhistory
+
+  
+	setopt appendhistory autocd beep extendedglob nomatch notify
+	setopt HIST_IGNORE_SPACE
+	setopt extended_history
+	setopt hist_expire_dups_first
+	setopt hist_ignore_dups # ignore duplication command history list
+	setopt hist_ignore_space
+	setopt hist_verify
+	setopt inc_append_history
+	setopt share_history
+	HISTSIZE=100000000
+	SAVEHIST=100000000
+	fc -p $HISTFILE
+
+	ZSH_AUTOSUGGEST_STRATEGY=(history completion) 
+	function mypwd {
+		if [[ $(pwd) == $HOME ]]; then
+			echo "~"
+		else 
+			echo "$(basename $(pwd))"
+		fi
+	}
+	
+	#eval "$(starship init zsh)"
+	cinza="$(tput bold ; tput setaf 0)"
+	branco="$(tput bold ; tput setaf 7)"
+	azul="$(tput bold; tput setaf 4)"
+	ciano="$(tput bold; tput setaf 6)"
+	vermelho="$(tput bold; tput setaf 1)"
+#	export PS1="${azul}[${ciano} $(whoami) ${branco}%1d ${azul}]${branco}$ " 
+	eval "$(starship init zsh)"
+	export PATH="$PATH:$HOME/.emacs.d/bin"
+# endconfigure plugins
 
 
+# load plugins
+antigen apply
+. "$HOME/.cargo/env"
+export MIRIFLAGS="-Zmiri-ignore-leaks -Zmiri-disable-isolation"
 
-export ZSH="/home/yxqsnz/.oh-my-zsh"
-source ~/.scripts/autoload.zsh
-
-# Set name of the theme to load --- if set to "random", it will
-# load a random theme each time oh-my-zsh is loaded, in which case,
-# to know which specific one was loaded, run: echo $RANDOM_THEME
-# See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-#ZSH_THEME="yxqsnz"
-
-# Set list of themes to pick from when loading at random
-# Setting this variable when ZSH_THEME=random will cause zsh to load
-# a theme from this variable instead of looking in $ZSH/themes/
-# If set to an empty array, this variable will have no effect.
-# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
-
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
-
-# Uncomment the following line to use hyphen-insensitive completion.
-# Case-sensitive completion must be off. _ and - will be interchangeable.
-# HYPHEN_INSENSITIVE="true"
-
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment the following line to automatically update without prompting.
-# DISABLE_UPDATE_PROMPT="true"
-
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment the following line if pasting URLs and other text is messed up.
-# DISABLE_MAGIC_FUNCTIONS="true"
-
-# Uncomment the following line to disable colors in ls.
-# DISABLE_LS_COLORS="true"
-
-# Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment the following line to enable command auto-correction.
-# ENABLE_CORRECTION="true"
-
-# Uncomment the following line to display red dots whilst waiting for completion.
-# Caution: this setting can cause issues with multiline prompts (zsh 5.7.1 and newer seem to work)
-# See https://github.com/ohmyzsh/ohmyzsh/issues/5765
-# COMPLETION_WAITING_DOTS="true"
-
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-# DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# You can set one of the optional three formats:
-# "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# or set a custom format using the strftime function format specifications,
-# see 'man strftime' for details.
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load?
-# Standard plugins can be found in $ZSH/plugins/
-# Custom plugins may be added to $ZSH_CUSTOM/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
-
-source $ZSH/oh-my-zsh.sh
-
-# User configuration
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-#compdef _gh gh
-
-# zsh completion for gh                                   -*- shell-script -*-
-
-__gh_debug()
-{
-    local file="$BASH_COMP_DEBUG_FILE"
-    if [[ -n ${file} ]]; then
-        echo "$*" >> "${file}"
-    fi
+# utils
+#frep - frep 's/a/b/g' a.txt
+function frep() {
+	sed $1 $2 > /tmp/FREPFILE
+	cp $2       /tmp/$2.backup
+	rm $2
+	cp /tmp/FREPFILE $2
 }
+export DENO_INSTALL="/home/yxqsnz/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
+function cbuild {
+	EXECUTABLE=$(mktemp --suffix=.exe)
+	if clang $@ -o $EXECUTABLE; then
+		$EXECUTABLE
+	fi
 
-_gh()
-{
-    local shellCompDirectiveError=1
-    local shellCompDirectiveNoSpace=2
-    local shellCompDirectiveNoFileComp=4
-    local shellCompDirectiveFilterFileExt=8
-    local shellCompDirectiveFilterDirs=16
-
-    local lastParam lastChar flagPrefix requestComp out directive comp lastComp noSpace
-    local -a completions
-
-    __gh_debug "\n========= starting completion logic =========="
-    __gh_debug "CURRENT: ${CURRENT}, words[*]: ${words[*]}"
-
-    # The user could have moved the cursor backwards on the command-line.
-    # We need to trigger completion from the $CURRENT location, so we need
-    # to truncate the command-line ($words) up to the $CURRENT location.
-    # (We cannot use $CURSOR as its value does not work when a command is an alias.)
-    words=("${=words[1,CURRENT]}")
-    __gh_debug "Truncated words[*]: ${words[*]},"
-
-    lastParam=${words[-1]}
-    lastChar=${lastParam[-1]}
-    __gh_debug "lastParam: ${lastParam}, lastChar: ${lastChar}"
-
-    # For zsh, when completing a flag with an = (e.g., gh -n=<TAB>)
-    # completions must be prefixed with the flag
-    setopt local_options BASH_REMATCH
-    if [[ "${lastParam}" =~ '-.*=' ]]; then
-        # We are dealing with a flag with an =
-        flagPrefix="-P ${BASH_REMATCH}"
-    fi
-
-    # Prepare the command to obtain completions
-    requestComp="${words[1]} __complete ${words[2,-1]}"
-    if [ "${lastChar}" = "" ]; then
-        # If the last parameter is complete (there is a space following it)
-        # We add an extra empty parameter so we can indicate this to the go completion code.
-        __gh_debug "Adding extra empty parameter"
-        requestComp="${requestComp} \"\""
-    fi
-
-    __gh_debug "About to call: eval ${requestComp}"
-
-    # Use eval to handle any environment variables and such
-    out=$(eval ${requestComp} 2>/dev/null)
-    __gh_debug "completion output: ${out}"
-
-    # Extract the directive integer following a : from the last line
-    local lastLine
-    while IFS='\n' read -r line; do
-        lastLine=${line}
-    done < <(printf "%s\n" "${out[@]}")
-    __gh_debug "last line: ${lastLine}"
-
-    if [ "${lastLine[1]}" = : ]; then
-        directive=${lastLine[2,-1]}
-        # Remove the directive including the : and the newline
-        local suffix
-        (( suffix=${#lastLine}+2))
-        out=${out[1,-$suffix]}
-    else
-        # There is no directive specified.  Leave $out as is.
-        __gh_debug "No directive found.  Setting do default"
-        directive=0
-    fi
-
-    __gh_debug "directive: ${directive}"
-    __gh_debug "completions: ${out}"
-    __gh_debug "flagPrefix: ${flagPrefix}"
-
-    if [ $((directive & shellCompDirectiveError)) -ne 0 ]; then
-        __gh_debug "Completion received error. Ignoring completions."
-        return
-    fi
-
-    while IFS='\n' read -r comp; do
-        if [ -n "$comp" ]; then
-            # If requested, completions are returned with a description.
-            # The description is preceded by a TAB character.
-            # For zsh's _describe, we need to use a : instead of a TAB.
-            # We first need to escape any : as part of the completion itself.
-            comp=${comp//:/\\:}
-
-            local tab=$(printf '\t')
-            comp=${comp//$tab/:}
-
-            __gh_debug "Adding completion: ${comp}"
-            completions+=${comp}
-            lastComp=$comp
-        fi
-    done < <(printf "%s\n" "${out[@]}")
-
-    if [ $((directive & shellCompDirectiveNoSpace)) -ne 0 ]; then
-        __gh_debug "Activating nospace."
-        noSpace="-S ''"
-    fi
-
-    if [ $((directive & shellCompDirectiveFilterFileExt)) -ne 0 ]; then
-        # File extension filtering
-        local filteringCmd
-        filteringCmd='_files'
-        for filter in ${completions[@]}; do
-            if [ ${filter[1]} != '*' ]; then
-                # zsh requires a glob pattern to do file filtering
-                filter="\*.$filter"
-            fi
-            filteringCmd+=" -g $filter"
-        done
-        filteringCmd+=" ${flagPrefix}"
-
-        __gh_debug "File filtering command: $filteringCmd"
-        _arguments '*:filename:'"$filteringCmd"
-    elif [ $((directive & shellCompDirectiveFilterDirs)) -ne 0 ]; then
-        # File completion for directories only
-        local subDir
-        subdir="${completions[1]}"
-        if [ -n "$subdir" ]; then
-            __gh_debug "Listing directories in $subdir"
-            pushd "${subdir}" >/dev/null 2>&1
-        else
-            __gh_debug "Listing directories in ."
-        fi
-
-        local result
-        _arguments '*:dirname:_files -/'" ${flagPrefix}"
-        result=$?
-        if [ -n "$subdir" ]; then
-            popd >/dev/null 2>&1
-        fi
-        return $result
-    else
-        __gh_debug "Calling _describe"
-        if eval _describe "completions" completions $flagPrefix $noSpace; then
-            __gh_debug "_describe found some completions"
-
-            # Return the success of having called _describe
-            return 0
-        else
-            __gh_debug "_describe did not find completions."
-            __gh_debug "Checking if we should do file completion."
-            if [ $((directive & shellCompDirectiveNoFileComp)) -ne 0 ]; then
-                __gh_debug "deactivating file completion"
-
-                # We must return an error code here to let zsh know that there were no
-                # completions found by _describe; this is what will trigger other
-                # matching algorithms to attempt to find completions.
-                # For example zsh can match letters in the middle of words.
-                return 1
-            else
-                # Perform file completion
-                __gh_debug "Activating file completion"
-
-                # We must return the result of this command, so it must be the
-                # last command, or else we must store its result to return it.
-                _arguments '*:filename:_files'" ${flagPrefix}"
-            fi
-        fi
-    fi
 }
+# function powercord {
+	# if [[ "$1" == 'in' || "$1" == 'add' ]]; then
+		# pushd $PC_DIRECTORY >/dev/null
+			# pushd $PC_DIRECTORY/src/Powercord/plugins >/dev/null
+				# echo "Installing Plugins: "
+								# 
+				# for repo in $@; do
+					# if [[ $repo == 'in' ]]; then
+						# continue
+					# fi
+					# printf "    \e[34m$repo... \e[0m"
+					# GIT=$(git clone $repo 2>/dev/null)
+					# echo "\e[32mok.\e[0m"
+				# done
+			# popd >/dev/null
+		# popd >/dev/null
+	# fi
+	# if [[ "$1" == 'tin' || "$1" == 'add-theme' ]]; then
+			# pushd $PC_DIRECTORY >/dev/null
+				# pushd $PC_DIRECTORY/src/Powercord/themes >/dev/null
+					# echo "Installing themes: "
+									# 
+					# for repo in $@; do
+						# if [[ $repo == 'tin' ]]; then
+							# continue
+						# fi
+						# printf "    \e[34m$repo... \e[0m"
+						# GIT=$(git clone $repo 2>/dev/null)
+						# echo "\e[32mok.\e[0m"
+					# done
+				# popd >/dev/null
+			# popd >/dev/null
+	# fi
+# }
+pc_plug_init $PC_DIRECTORY
 
-# don't run the completion function when being source-ed or eval-ed
-if [ "$funcstack[1]" = "_gh" ]; then
-	_gh
-fi
-change-cursor 4
+pcp https://github.com/Juby210/bdCompat as plug
+pcp https://github.com/AAGaming00/better-connections as plug
+pcp https://github.com/Juby210/better-folders as plug
+pcp https://github.com/doggybootsy/BetterMediaPlayer as plug
+pcp https://github.com/griefmodz/better-status-indicators as plug
+pcp https://github.com/NurMarvin/better-threads as plug
+pcp https://github.com/12944qwerty/copy-server-icon as plug
+pcp https://github.com/12944qwerty/css-toggler as plug
+pcp https://github.com/KableKo/discord-status as plug
+pcp https://github.com/Juby210/game-activity-toggle as plug
+pcp https://github.com/BenSegal855/In-app-notifs as plug
+pcp https://github.com/Juby210/mention-count as plug
+pcp https://github.com/SomeAspy/nekos-dot-life as plug
+pcp https://github.com/griefmodz/notey as plug
+pcp https://github.com/E-boi/NSFW-tags as plug
+pcp https://github.com/griefmodz/online-friends-count as plug
+pcp https://github.com/Puyodead1/pc-stafftags as plug
+pcp https://github.com/bottom-software-foundation/power-bottom as plug
+pcp https://github.com/E-boi/Powercord-BlurNSFW as plug
+pcp https://github.com/yuwui/powercord-greentext as plug
+pcp https://github.com/Bricklou/powercord-pindms as plug
+pcp https://github.com/LandenStephenss/PowercordPluginDownloader as plug
+pcp https://github.com/Penguin-Spy/powercord-ppl-moe as plug
+pcp https://github.com/SammCheese/powercord-sauce as plug
+pcp https://github.com/ploogins/PowercordThemeDownloader as plug
+pcp https://github.com/LandenStephenss/PowerFiles as plug
+pcp https://github.com/A-Trash-Coder/preview-hider as plug
+pcp https://github.com/cyyynthia/pronoundb-powercord as plug
+pcp https://github.com/A-Trash-Coder/Quick-Channel-Mute as plug
+pcp https://github.com/Rodentman87/reddit-parser as plug
+pcp https://github.com/Twizzer/relationship-notifier as plug
+pcp https://github.com/12944qwerty/report-messages as plug
+pcp https://github.com/ADoesGit/rich-quotes as plug
+pcp https://github.com/griefmodz/scrollable-autocomplete as plug
+pcp https://github.com/cyyynthia/senkocord as plug
+pcp https://github.com/E-boi/ShowConnections as plug
+pcp https://github.com/Oocrop/show-sessions as plug
+pcp https://github.com/redstonekasi/theme-toggler as plug
+pcp https://github.com/justkamiii/token as plug
+pcp https://github.com/powercord-community/twemoji-but-good as plug
+pcp https://github.com/VenPlugs/Unindent as plug
+pcp https://github.com/griefmodz/user-birthdays as plug
+pcp https://github.com/dutake/voice-chat-utilities as plug
+pcp https://github.com/Vap0r1ze/vpc-shiki as plug
+pcp https://github.com/jaimeadf/who-reacted as plug
+pcp https://github.com/KryskZ09/zencord as plug
+
+
+gh completion -s zsh         > ~/.zfunc/_gh
+rustup completions zsh       > ~/.zfunc/_rustup
+rustup completions zsh cargo > ~/.zfunc/_cargo
+autoload -U compinit; compinit
+
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$HOME/.zsh/.zcompcache"
+autoload -Uz compinit
+compinit -u
